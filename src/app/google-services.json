@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "177050836827",
+    "firebase_url": "https://genericcontact-8ceca.firebaseio.com",
+    "project_id": "genericcontact-8ceca",
+    "storage_bucket": "genericcontact-8ceca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177050836827:android:0044f92f0ca97b30f4c47e",
+        "android_client_info": {
+          "package_name": "generic.contact"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177050836827-ott6roth9k47hv2usaus5dth65bq03d6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmE1M1YX3St63yKMSVYpiMZ7hTH6Q3_gg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177050836827-ott6roth9k47hv2usaus5dth65bq03d6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

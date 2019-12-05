@@ -1,0 +1,41 @@
+<section class="row mt-5">
+  <div class="card">
+    <div class="card-header text-center" style="background-color: #2b393d ;color: white">
+      <h2>Control</h2>
+    </div>
+    <div class="card-body">
+      <div class="col">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="text" class="form-control col-md-12" placeholder="Buscar..." name="filterCtrl"
+                [(ngModel)]="filterCtrl">
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive  pull-center">
+          <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th class="text-center" scope="col">Fecha</th>
+                <th class="text-center" scope="col">UsuarioId</th>
+                <th class="text-center" scope="col">Accion</th>
+                <th class="text-center" scope="col">Registro</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let control of controls | filterControl:filterCtrl | paginate: { itemsPerPage: 5, currentPage: p }">
+                <td class="text-center">{{control.updated_at}}</td>
+                <td class="text-center">{{control.userUid}}</td>
+                <td class="text-center">{{control.accion}}</td>
+                <td class="text-center">{{control.ci}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

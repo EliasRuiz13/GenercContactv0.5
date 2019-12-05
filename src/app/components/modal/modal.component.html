@@ -1,0 +1,78 @@
+<script>
+  var fecha = angular.module('fecha', [])
+</script>
+<div class="modal fade" id="modalContact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #2b393d ;color: white">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Nuevo Contacto
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form name="formContact" #formContact="ngForm" (ngSubmit)="formContact.form.valid && onSaveContact(formContact)">
+          <input type="hidden" name="id" [(ngModel)]="this.dataCont.selectedContact.id">
+          <input type="hidden" name="userUid" [value]="userUid">
+          <input type="hidden" name="accion" [value]="Agregado">
+          <input type="hidden" name="updated_at" value="{{ mydate | date : 'dd-MM-yyyy' }}"
+          ngModel="{{ mydate | date : 'dd-MM-yyyy' }}" required>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="nombre" class="col-form-label">Nombre:</label>
+              <input type="text" class="form-control" #nombre="ngModel" name="nombre" 
+              [(ngModel)]="this.dataCont.selectedContact.nombre" required minlength="3">
+              <div class="alert alert-danger" role="alert" *ngIf="nombre.touched && !nombre.valid">
+                <div *ngIf="nombre.errors.required">Nombre es requerido.</div>
+                <div *ngIf="nombre.errors.minlength">Nombre necesita al menos 3 caracteres.</div>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="apellido" class="col-form-label">Apellido:</label>
+              <input type="text" class="form-control" #apellido="ngModel" name="apellido"
+                [(ngModel)]="this.dataCont.selectedContact.apellido" required minlength="3">
+                <div class="alert alert-danger" role="alert" *ngIf="apellido.touched && !apellido.valid">
+                  <div *ngIf="apellido.errors.required">Apellido es requerido.</div>
+                  <div *ngIf="apellido.errors.minlength">Apellido necesita al menos 3 caracteres.</div>
+                </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ci">Cedula Identidad:</label>
+            <input type="number" #ci="ngModel" name="ci" class="form-control" placeholder="Cedula de Identidad"
+              [(ngModel)]="this.dataCont.selectedContact.ci" required uniqueCi minlength="5">
+              <div class="alert alert-danger" role="alert" *ngIf="ci.touched && !ci.valid">
+                <div *ngIf="ci.errors.required">Cedula es requerido.</div>
+                <div *ngIf="ci.errors.minlength">Cedula necesita al menos 5 caracteres.</div>
+                <div *ngIf="ci.errors.uniqueCi">Este numero de Cedula ya existe.</div>
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="telefono">Telefono</label>
+              <input type="number" #telefono="ngModel" name="telefono" class="form-control" placeholder="Telefono"
+                [(ngModel)]="this.dataCont.selectedContact.telefono" required minlength="5">
+                <div class="alert alert-danger" role="alert" *ngIf="telefono.touched && !telefono.valid">
+                  <div *ngIf="telefono.errors.required">Telefono es requerido.</div>
+                  <div *ngIf="telefono.errors.minlength">Telefono necesita al menos 5 caracteres.</div>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="email">Email</label>
+              <input type="text" #email="ngModel" name="email" class="form-control" placeholder="Email"
+                [(ngModel)]="this.dataCont.selectedContact.email" required minlength="5">
+                <div class="alert alert-danger" role="alert" *ngIf="email.touched && !email.valid">
+                  <div *ngIf="email.errors.required">Email es requerido.</div>
+                  <div *ngIf="email.errors.minlength">Email necesita al menos 5 caracteres.</div>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" #btnClose data-dismiss="modal"><i class="fas fa-times"></i> Salir</button>
+            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

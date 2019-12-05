@@ -1,0 +1,73 @@
+<section class="row mt-5">
+  <div class="card">
+    <div class="card-header text-center" style="background-color: #2b393d ;color: white">
+      <h2>Contactos</h2>
+    </div>
+    <div class="card-body">
+      <div class="col">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <button class="btn btn-success float-right col-md-2" data-toggle="modal" data-target="#modalContact">
+                <i class="fas fa-plus"></i> Nuevo</button>
+              <input type="text" class="form-control input-group-sm col-md-10" name="filterPost" placeholder="Buscar..."
+                [(ngModel)]="filterPost">
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th class="text-center" scope="col">N°</th>
+                <th class="text-center" scope="col">Nombre</th>
+                <th class="text-center" scope="col">Apellido</th>
+                <th class="text-center" scope="col">CI</th>
+                <th class="text-center" scope="col">Telefono</th>
+                <th class="text-center" scope="col">Email</th>
+                <th class="text-center" colspan="2" scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let contact of contacts | filter:filterPost | paginate: { itemsPerPage: 5, currentPage: p }; index as i">
+                <th class="text-center" scope="row">{{i+1}}</th>
+                <td>{{contact.nombre}}</td>
+                <td>{{contact.apellido}}</td>
+                <td class="text-center">{{contact.ci}}</td>
+                <td class="text-center">{{contact.telefono}}</td>
+                <td class="text-center">{{contact.email}}</td>
+                <td class="text-center" *ngIf="contact.userUid == userUid || isAdmin == true; else noOwner">
+                  <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalContactMod"
+                    (click)="onPreUpdateContact(contact)"><i class="fas fa-pen-alt"></i> Modificar</button>
+                </td>
+                <ng-template #noOwner>
+                  <td class="text-center">
+                    <button class="btn btn-sm btn-secondary" disabled="true"><i class="fas fa-pen-alt"></i>
+                      Modificar</button>
+                  </td>
+                </ng-template>
+                <td class="text-center" *ngIf="isAdmin == true; else noAdmin">
+                  <button class="btn btn-sm btn-danger" (click)="onDeleteContact(contact.id)"><i
+                      class="fas fa-trash-alt"></i>
+                    Eliminar</button>
+                </td>
+                <ng-template #noAdmin>
+                  <td class="text-center">
+                    <button class="btn btn-sm btn-danger" disabled="true"><i class="fas fa-trash-alt"></i>
+                      Eliminar</button>
+                  </td>
+                </ng-template>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+  </div>
+</section>
+
+<app-modal [userUid]="userUid"></app-modal>
+<app-modalmod [userUid]="userUid"></app-modalmod>
